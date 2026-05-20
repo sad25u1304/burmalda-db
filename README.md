@@ -61,3 +61,34 @@
 
 ### Реализация паттерна:
 Центральный класс `DatabaseFacade` (файлы `include/Database.h` и `src/Database.cpp`) объединяет разрозненные внутренние интерфейсы низкоуровневых сущностей в единое высокоуровневое окно управления.
+
+---
+
+## 💻 Инструкция по эксплуатации СУБД
+
+### 1. Сборка проекта из исходников
+```bash
+chmod +x build.sh run.sh
+./build.sh
+
+Запуск локального сервера СУБД
+./run.sh -h 127.0.0.1 -p 8080
+
+Сценарий полной проверки (Тест-кейс приёмки)
+-- Создание пространства данных
+CREATE DATABASE burmalda_db;
+
+-- Инициализация таблицы
+CREATE TABLE students (id INT, name TEXT, rating FLOAT, is_active BOOL);
+
+-- Пакетная вставка записей (INSERT)
+INSERT INTO students (id, name, rating, is_active) VALUES (1, 'Andrey', 4.95, TRUE), (2, 'Ivan', 4.12, TRUE), (3, 'Dmitry', 3.80, FALSE);
+
+-- Вывод всей таблицы
+SELECT * FROM students;
+
+-- Обновление записи по WHERE
+UPDATE students SET rating = 5.0 WHERE id = 1;
+
+-- Удаление строк
+DELETE FROM students WHERE is_active = FALSE;
