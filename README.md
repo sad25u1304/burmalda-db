@@ -73,12 +73,9 @@ chmod +x build.sh run.sh
 Запуск локального сервера СУБД
 ./build/MyDatabaseSystem -h 127.0.0.1 -p 8080
 
-Сценарий полной проверки (Тест-кейс приёмки)
+Сценарий полной проверки 
 -- Создание базы данных
 CREATE DATABASE burmalda_db;
-
--- Выбор базы данных
-USE burmalda_db;
 
 -- Создание таблицы
 CREATE TABLE students (id INT, name TEXT, rating FLOAT, is_active INT);
