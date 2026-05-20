@@ -1,0 +1,4 @@
+id:INT,name:TEXT,group_name:TEXT
+1,'Andrey','IU5-11B_PRO'
+2,'Ivan','IU5-11B'
+3,'Dmitry','IU5-12B'
