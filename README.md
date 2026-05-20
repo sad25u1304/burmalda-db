@@ -66,7 +66,7 @@
 
 ## 💻 Инструкция по эксплуатации СУБД
 
-Сборка проекта из исходников (WSL / Linux)
+Сборка проекта из исходников
 chmod +x build.sh run.sh
 ./build.sh
 
@@ -74,6 +74,12 @@ chmod +x build.sh run.sh
 ./build/MyDatabaseSystem -h 127.0.0.1 -p 8080
 
 Сценарий полной проверки (Тест-кейс приёмки)
+-- Создание базы данных
+CREATE DATABASE burmalda_db;
+
+-- Выбор базы данных
+USE burmalda_db;
+
 -- Создание таблицы
 CREATE TABLE students (id INT, name TEXT, rating FLOAT, is_active INT);
 
