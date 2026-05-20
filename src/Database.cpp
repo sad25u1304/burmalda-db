@@ -7,6 +7,13 @@
 #include <unistd.h>
 #include <algorithm>
 
+#ifdef _WIN32
+    #include <direct.h>
+    #define mkdir _mkdir
+#else
+    #include <sys/stat.h>
+#endif
+
 // Вспомогательная функция для удаления пробелов и символов новой строки
 std::string trim(std::string str) {
     str.erase(0, str.find_first_not_of(" \t\r\n"));
@@ -81,7 +88,9 @@ std::string DatabaseFacade::getTablePath(const std::string& table_name) const {
 }
 
 bool DatabaseFacade::tableExists(const std::string& table_name) {
-    return access(getTablePath(table_name).c_str(), F_OK) == 0;
+    std::string path = getTablePath(table_name);
+    std::ifstream f(path.c_str());
+    return f.good();
 }
 
 bool DatabaseFacade::loadTable(const std::string& table_name) {
@@ -138,11 +147,15 @@ std::string DatabaseFacade::execute(const std::string& query_raw) {
     // 1. CREATE DATABASE
     if (std::regex_match(query, match, create_db_regex)) {
         std::string db_name = match[1];
-        if (mkdir(db_name.c_str(), 0777) == 0) {
+        #ifdef _WIN32
+            if (mkdir(db_name.c_str()) == 0) {
+        #else
+            if (mkdir(db_name.c_str(), 0777) == 0) {
+        #endif
             current_db = db_name;
             return "Database " + db_name + " created and selected.";
         }
-        current_db = db_name; // Если уже существует, просто переключаемся
+        current_db = db_name;
         return "Database " + db_name + " selected.";
     }
 
@@ -150,6 +163,9 @@ std::string DatabaseFacade::execute(const std::string& query_raw) {
     if (std::regex_match(query, match, drop_db_regex)) {
         std::string db_name = match[1];
         std::string rmdir_cmd = "rm -rf " + db_name;
+        #ifdef _WIN32
+            rmdir_cmd = "rmdir /s /q " + db_name;
+        #endif
         std::system(rmdir_cmd.c_str());
         if (current_db == db_name) current_db = "";
         return "Database " + db_name + " dropped.";
