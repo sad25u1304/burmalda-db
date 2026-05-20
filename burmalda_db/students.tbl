@@ -1,0 +1,3 @@
+id:INT,name:TEXT,rating:FLOAT,is_active:BOOL
+1,'Andrey',5.0,TRUE
+2,'Ivan',4.12,TRUE
