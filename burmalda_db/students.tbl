@@ -1,0 +1,3 @@
+id:INT,name:TEXT,rating:FLOAT,is_active:INT
+1,'Andrey',5.0,1
+2,'Ivan',4.12,1
