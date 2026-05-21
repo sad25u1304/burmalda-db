@@ -67,30 +67,30 @@
 ## 💻 Инструкция по эксплуатации СУБД
 
 Сборка проекта из исходников
-chmod +x build.sh run.sh
+chmod +x build.sh run.sh; 
 ./build.sh
 
 Запуск локального сервера СУБД
 ./build/MyDatabaseSystem -h 127.0.0.1 -p 8080
 
 Сценарий полной проверки 
--- Создание базы данных
+-- Создание базы данных:
 CREATE DATABASE burmalda_db;
 
--- Создание таблицы
+-- Создание таблицы: 
 CREATE TABLE students (id INT, name TEXT, rating FLOAT, is_active INT);
 
--- Пакетная вставка записей
+-- Пакетная вставка записей: 
 INSERT INTO students (id, name, rating, is_active) VALUES (1, 'Andrey', 4.95, 1), (2, 'Ivan', 4.12, 1), (3, 'Dmitry', 3.80, 0);
 
--- Вывод всей таблицы
+-- Вывод всей таблицы: 
 SELECT * FROM students;
 
--- Обновление записи по WHERE
+-- Обновление записи по WHERE: 
 UPDATE students SET rating = 5.0 WHERE id = 1;
 
--- Удаление строк
+-- Удаление строк: 
 DELETE FROM students WHERE is_active = 0;
 
--- Выход
+-- Выход: 
 exit
